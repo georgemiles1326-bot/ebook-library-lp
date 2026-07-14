@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>「その一冊」に出会うまで — あなたにぴったりの一冊が見つかるライブラリ</title>
+  <meta name="description" content="人間関係・自己成長・東洋哲学・西洋哲学まで。あなたが今抱えている「その悩み」に直接答える、全8冊のセルフヘルプ電子書籍ライブラリ。漫画で紹介する物語つき。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="「その一冊」に出会うまで — あなたにぴったりの一冊が見つかるライブラリ" />
+  <meta property="og:description" content="人間関係・自己成長・東洋哲学・西洋哲学まで。あなたが今抱えている「その悩み」に、直接答える本を厳選しました。全8冊。" />
+  <meta property="og:image" content="author_photo.jpg" />
+  <!-- TODO: 公開URLで運用する際は、og:image/twitter:image を https://... の絶対URLに差し替えてください（相対パスはSNSクローラーが読み込めません） -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="author_photo.jpg" />
+  <!-- Google tag (gtag.js) -->
+  <!-- TODO: G-XXXXXXXXXX を実際のGA4測定IDに置き換えてください -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --gold: #f0a500;
+      --soft: #f8f5f0;
+      --card-bg: #ffffff;
+      --text: #2d2d2d;
+      --muted: #666;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      background: var(--soft);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+      padding: 72px 24px 48px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 46px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 18px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto 8px;
+    }
+    .hero .scroll-hint {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 1px;
+      margin-top: 20px;
+    }
+    .hero .scroll-hint span { display: block; margin-top: 8px; font-size: 22px; animation: bounce 1.5s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* ===== MANGA ===== */
+    .manga-wrap { max-width: 480px; margin: 0 auto; padding: 40px 20px; }
+    .manga-page-img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      display: block;
+      margin-bottom: 44px;
+    }
+    .manga-page-img:last-child { margin-bottom: 0; }
+
+    /* ===== STORY CTA (manga → persona bridge) ===== */
+    .cta {
+      background: linear-gradient(135deg, #0f3460, #1a1a2e);
+      color: #fff; text-align: center; padding: 56px 20px;
+    }
+    .cta h2 { font-size: clamp(20px, 3.5vw, 30px); font-weight: 900; margin-bottom: 12px; }
+    .cta p { color: rgba(255,255,255,0.75); font-size: 14px; max-width: 480px; margin: 0 auto 26px; }
+    .cta .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; font-weight: 700; font-size: 14px; padding: 13px 28px; border-radius: 999px; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+
+    /* ===== SECTION ===== */
+    .section { max-width: 960px; margin: 0 auto; padding: 60px 20px; }
+    .section-title {
+      text-align: center;
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 48px;
+    }
+
+    /* ===== PERSONA CARDS ===== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      border-top: 5px solid;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .card .emoji { font-size: 36px; margin-bottom: 12px; display: block; }
+    .card .persona-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .card h3 {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      overflow-wrap: anywhere;
+    }
+    .card .arrow {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 14px 0 8px;
+    }
+    .card .book-title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .card .book-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    /* color themes */
+    .c1 { border-color: #e94560; }
+    .c1 .book-title { color: #e94560; }
+    .c2 { border-color: #0096c7; }
+    .c2 .book-title { color: #0096c7; }
+    .c3 { border-color: #f77f00; }
+    .c3 .book-title { color: #f77f00; }
+    .c4 { border-color: #6a0572; }
+    .c4 .book-title { color: #6a0572; }
+    .c5 { border-color: #2d6a4f; }
+    .c5 .book-title { color: #2d6a4f; }
+    .c6 { border-color: #e9c46a; }
+    .c6 .book-title { color: #b5832a; }
+    .c7 { border-color: #457b9d; }
+    .c7 .book-title { color: #457b9d; }
+    .c8 { border-color: #e76f51; }
+    .c8 .book-title { color: #e76f51; }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      text-align: center;
+      padding: 12px 20px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ===== BOOK LIST ===== */
+    .books-section {
+      background: var(--primary);
+      color: #fff;
+      padding: 60px 20px;
+    }
+    .books-section .section-title { color: #fff; }
+    .books-section .section-sub { color: rgba(255,255,255,0.6); }
+
+    .book-list {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .book-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .book-item .num {
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .book-item h4 {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+    .book-item p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    /* ===== BUTTON ===== */
+    .btn-amazon {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 9px 20px;
+      background: #ff9900;
+      color: #111;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-amazon:hover { background: #e68900; transform: scale(1.03); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 13px;
+    }
+
+    /* ===== PRICE / UNLIMITED BADGE ===== */
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .price-tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .unlimited-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #1a1a2e;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .badge-no {
+      display: inline-block;
+      background: var(--soft);
+      border: 1px solid rgba(0,0,0,0.08);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* ===== QUICK NAV (診断導線) ===== */
+    .quick-nav {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      text-align: center;
+      scroll-margin-top: 20px;
+    }
+    .quick-nav .label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .quick-nav .chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .quick-nav .chip {
+      display: inline-block;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .quick-nav .chip:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+    .quick-nav .chip.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ===== 関連書籍サジェスト ===== */
+    .related-wrap { max-width: 480px; margin: 0 auto; }
+    .related-suggestion {
+      text-align: center;
+      margin-top: 20px;
+      padding: 16px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .related-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .related-link { font-size: 14px; font-weight: 700; color: var(--accent); text-decoration: none; }
+    .related-link:hover { text-decoration: underline; }
+
+    /* ===== CTAの優先度ラベル ===== */
+    .step-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    /* ===== 1冊だけ絞り込み表示 ===== */
+    .card.is-hidden { display: none; }
+    .cards.is-filtered {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    #reset-filter {
+      display: none;
+      margin: -20px auto 32px;
+    }
+    .reset-wrap { text-align: center; }
+
+    a.card { text-decoration: none; color: inherit; display: block; }
+    a.card:hover .btn-amazon { background: #e68900; transform: scale(1.03); }
+
+    /* ===== LEAD CAPTURE ===== */
+    .lead-capture {
+      background: linear-gradient(135deg, #0f3460, #1a1a2e);
+      color: #fff;
+      text-align: center;
+      padding: 56px 20px;
+    }
+    .lead-capture h2 { font-size: clamp(20px, 3.5vw, 30px); font-weight: 900; margin-bottom: 12px; }
+    .lead-capture p { color: rgba(255,255,255,0.75); font-size: 14px; max-width: 480px; margin: 0 auto 28px; }
+    .btn-lead {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-lead:hover { background: #d13750; transform: scale(1.03); }
+
+    /* ===== ブリッジコピー ===== */
+    .bridge {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 40px 20px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+    .books-section .bridge { color: rgba(255,255,255,0.7); }
+
+    /* ===== AUTHOR PROFILE ===== */
+    .author-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .author-section .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--soft);
+      margin: 0 auto 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .author-section .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .author-section h2 { font-size: clamp(20px, 3vw, 28px); font-weight: 900; margin-bottom: 8px; }
+    .author-section .role { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+    .author-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 0 28px;
+    }
+    .author-stats .stat {
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      border-radius: 12px;
+      padding: 14px 22px;
+      min-width: 140px;
+    }
+    .author-stats .stat .num { font-size: 20px; font-weight: 900; color: var(--accent); display: block; }
+    .author-stats .stat .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .author-section .bio { font-size: 14px; color: var(--text); line-height: 1.9; max-width: 520px; margin: 0 auto; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 56px 16px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO: 漫画ストーリー導入 -->
+<section class="hero">
+  <div class="badge">📖 全8冊シリーズ・漫画で紹介</div>
+  <h1>「その一冊」に出会うまでの<br><span>物語</span></h1>
+  <p>自己啓発書に疲れた夜、アイコが迷い込んだ小さな古書店。<br>そこであなたと同じ悩みに効く、たった一冊に出会う話。</p>
+  <div class="scroll-hint">まずは物語から<span>↓</span></div>
+</section>
+
+<!-- MANGA PANELS -->
+<div class="manga-wrap">
+  <img class="manga-page-img" src="manga_panels/page01.png" alt="1ページ目：自己啓発疲れの夜、路地裏の古書店を見つける" />
+  <img class="manga-page-img" src="manga_panels/page02.png" alt="2ページ目：与えても報われない／競争に疲れた" />
+  <img class="manga-page-img" src="manga_panels/page03.png" alt="3ページ目：自分の気質を知りたい／努力が実らない" />
+  <img class="manga-page-img" src="manga_panels/page04.png" alt="4ページ目：人生が停滞している／心の軸が欲しい" />
+  <img class="manga-page-img" src="manga_panels/page05.png" alt="5ページ目：執着を手放したい／正しく生きたい" />
+  <img class="manga-page-img" src="manga_panels/page06.png" alt="6ページ目：一冊を抱えて、店を出る" />
+</div>
+
+<!-- STORY → PERSONA BRIDGE -->
+<section class="cta">
+  <h2>あなたが今日出会うのは、どの一冊？</h2>
+  <p>アイコが出会った8冊は、すべて実在するシリーズです。<br>あなたの今の悩みに合う一冊を、8タイプ診断で見つけてください。</p>
+  <div class="btns">
+    <a href="#quick-nav" class="btn btn-primary">8タイプから診断する ↓</a>
+    <a href="https://lin.ee/qSmZof8r" class="btn btn-secondary" target="_blank">新刊情報を受け取る →</a>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<p class="bridge">似たような自己啓発書を何冊も試して、結局どれも続かなかった——そんな経験はありませんか？<br>それは「悪い本」に当たったからではなく、「今のあなたに合う入り口」を選べていなかっただけです。</p>
+
+<!-- QUICK NAV -->
+<nav class="quick-nav" id="quick-nav">
+  <p class="label">気になる悩みをタップすると、その本まで一気にジャンプします</p>
+  <div class="chips">
+    <a href="#type01" class="chip">😔 与えても報われない</a>
+    <a href="#type02" class="chip">😩 競争に疲れた</a>
+    <a href="#type03" class="chip">🧬 自分の気質を知りたい</a>
+    <a href="#type04" class="chip">💡 努力が実らない</a>
+    <a href="#type05" class="chip">🌀 人生が停滞している</a>
+    <a href="#type06" class="chip">🧘 心の軸が欲しい</a>
+    <a href="#type07" class="chip">🌸 執着を手放したい</a>
+    <a href="#type08" class="chip">⚖️ 正しく生きたい</a>
+  </div>
+</nav>
+
+<!-- PERSONA SECTION -->
+<section class="section">
+  <h2 class="section-title">あなたはどのタイプですか？</h2>
+  <p class="section-sub">当てはまるものをクリックして、おすすめの一冊を見つけてください</p>
+  <div class="reset-wrap">
+    <a href="#" id="reset-filter" class="chip">← すべてのタイプを見る</a>
+  </div>
+
+  <div class="cards">
+
+    <!-- 1 -->
+    <a id="type01" href="https://www.amazon.co.jp/dp/B0H1VTFSX2?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type01" target="_blank" class="card c1">
+      <span class="emoji">😔</span>
+      <div class="persona-label">タイプ 01</div>
+      <h3>「いい人」なのに、いつも損している気がする。与えても与えても、なぜか報われない。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">ギブで人生が変わる習慣</div>
+      <div class="book-desc">「賢く与える」ことで消耗せずに信頼と成果を積み上げる方法。テイカーに振り回されない境界線の引き方も解説。</div>
+      <div class="price-row">
+        <span class="price-tag">¥299</span>
+        <span class="unlimited-badge">Kindle Unlimited対象</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+    <!-- 2 -->
+    <a id="type02" href="https://www.amazon.co.jp/dp/B0H1WCT76B?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type02" target="_blank" class="card c2">
+      <span class="emoji">😩</span>
+      <div class="persona-label">タイプ 02</div>
+      <h3>職場での競争に疲れた。人間関係が重くて、毎日ヘトヘト。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">競争しない人ほど、うまくいく<br>——人生を優雅に生きる技術</div>
+      <div class="book-desc">WIN-WIN関係の本質を学び、競争から抜け出して「ともに豊かになる」生き方を手に入れる一冊。</div>
+      <div class="price-row">
+        <span class="price-tag">¥299</span>
+        <span class="badge-no">Unlimited対象外</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+    <!-- 3 -->
+    <a id="type03" href="https://www.amazon.co.jp/dp/B0GQPH9XV3?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type03" target="_blank" class="card c3">
+      <span class="emoji">🧬</span>
+      <div class="persona-label">タイプ 03</div>
+      <h3>自分の強みや気質が知りたい。なぜ自分はこうなのか、生まれ持った特性を理解したい。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">薬指の長い人の人生攻略大全</div>
+      <div class="book-desc">薬指の長さ（テストステロン指数）から読み解くあなたの気質・才能・人間関係のパターン。自己理解を深める一冊。</div>
+      <div class="price-row">
+        <span class="price-tag">¥399</span>
+        <span class="badge-no">Unlimited対象外</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+    <!-- 4 -->
+    <a id="type04" href="https://www.amazon.co.jp/dp/B0H23QRHVD?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type04" target="_blank" class="card c4">
+      <span class="emoji">💡</span>
+      <div class="persona-label">タイプ 04</div>
+      <h3>頑張っているのに成果が出ない。努力の方向が間違っているのかもしれない。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">努力のはかり</div>
+      <div class="book-desc">「努力の量」より「努力の質」が大事。正しく努力を測り、成果につながる動き方を身につけるための思考法。</div>
+      <div class="price-row">
+        <span class="price-tag">¥299</span>
+        <span class="unlimited-badge">Kindle Unlimited対象</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+    <!-- 5 -->
+    <a id="type05" href="https://www.amazon.co.jp/dp/B0GNK1TV8X?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type05" target="_blank" class="card c5">
+      <span class="emoji">🌀</span>
+      <div class="persona-label">タイプ 05</div>
+      <h3>人生が変わらない。何年も同じ場所にいる気がして、どうすればいいかわからない。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">人生が停滞している人の9割が知らない考え方 徹底ガイド</div>
+      <div class="book-desc">停滞の原因は「考え方のクセ」にある。9割の人が気づいていない思考の盲点と突破口を徹底解説。</div>
+      <div class="price-row">
+        <span class="price-tag">¥320</span>
+        <span class="badge-no">Unlimited対象外</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+    <!-- 6 -->
+    <a id="type06" href="https://www.amazon.co.jp/dp/B0GPN3KKRT?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type06" target="_blank" class="card c6">
+      <span class="emoji">🧘</span>
+      <div class="persona-label">タイプ 06</div>
+      <h3>心が折れそう。精神的な支えや、ぶれない生き方の軸が欲しい。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">歎異抄で読み解く成功論</div>
+      <div class="book-desc">800年前の名著「歎異抄」を現代の成功論として読み解く。苦しいときに支えになる、日本人の心の哲学。</div>
+      <div class="price-row">
+        <span class="price-tag">¥399</span>
+        <span class="badge-no">Unlimited対象外</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+    <!-- 7 -->
+    <a id="type07" href="https://www.amazon.co.jp/dp/B0GQ6MKGNV?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type07" target="_blank" class="card c7">
+      <span class="emoji">🌸</span>
+      <div class="persona-label">タイプ 07</div>
+      <h3>執着や不安を手放したい。心を軽くして、今この瞬間をもっと大切にしたい。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">般若心経——心を整える智慧</div>
+      <div class="book-desc">「色即是空」の教えが、現代人の不安・執着・怒りを溶かす。2600年の智慧を日常に活かす実践的な解説書。</div>
+      <div class="price-row">
+        <span class="price-tag">¥399</span>
+        <span class="badge-no">Unlimited対象外</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+    <!-- 8 -->
+    <a id="type08" href="https://www.amazon.co.jp/dp/B0GRQ53P32?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=type08" target="_blank" class="card c8">
+      <span class="emoji">⚖️</span>
+      <div class="persona-label">タイプ 08</div>
+      <h3>正しく生きたい。道徳や倫理の判断軸を、論理的に身につけたい。</h3>
+      <div class="arrow">▼ あなたにおすすめ</div>
+      <div class="book-title">小学生でも解るカントの哲学で<br>人生と道徳が整う教科書</div>
+      <div class="book-desc">難解なカント哲学を誰でもわかるように解説。「なぜこれが正しいのか」を論理で説明できる、ぶれない判断軸を手に入れる。</div>
+      <div class="price-row">
+        <span class="price-tag">¥299</span>
+        <span class="badge-no">Unlimited対象外</span>
+      </div>
+      <span class="btn-amazon">Amazonで読む →</span>
+    </a>
+
+  </div>
+
+  <!-- クロスセル -->
+  <div class="related-wrap">
+    <div class="related-suggestion" id="related-type01" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0H1WCT76B?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type01" target="_blank" class="related-link">競争しない人ほど、うまくいく——人生を優雅に生きる技術 →</a>
+    </div>
+    <div class="related-suggestion" id="related-type02" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0H1VTFSX2?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type02" target="_blank" class="related-link">ギブで人生が変わる習慣 →</a>
+    </div>
+    <div class="related-suggestion" id="related-type03" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0H23QRHVD?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type03" target="_blank" class="related-link">努力のはかり →</a>
+    </div>
+    <div class="related-suggestion" id="related-type04" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0GQPH9XV3?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type04" target="_blank" class="related-link">薬指の長い人の人生攻略大全 →</a>
+    </div>
+    <div class="related-suggestion" id="related-type05" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0GPN3KKRT?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type05" target="_blank" class="related-link">歎異抄で読み解く成功論 →</a>
+    </div>
+    <div class="related-suggestion" id="related-type06" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0GRQ53P32?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type06" target="_blank" class="related-link">小学生でも解るカントの哲学で人生と道徳が整う教科書 →</a>
+    </div>
+    <div class="related-suggestion" id="related-type07" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0GRQ53P32?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type07" target="_blank" class="related-link">小学生でも解るカントの哲学で人生と道徳が整う教科書 →</a>
+    </div>
+    <div class="related-suggestion" id="related-type08" style="display:none;">
+      <p class="related-label">合わせて読まれています</p>
+      <a href="https://www.amazon.co.jp/dp/B0GQ6MKGNV?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=related_type08" target="_blank" class="related-link">般若心経——心を整える智慧 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<p class="bridge">1冊だけで終わらせるのはもったいない。<br>人間関係の重さも、停滞も、執着も——悩みの根っこは、実はつながっています。<br>気になった1冊から読んで、合えばシリーズで深めてください。<br>※Kindle Unlimited対象外の本も、1冊¥299〜¥399で今すぐ読めます。</p>
+<div class="divider">— 全8冊のラインナップはこちら —</div>
+
+<!-- BOOK LIST -->
+<section class="books-section">
+  <div style="max-width:960px;margin:0 auto 40px;text-align:center;">
+    <h2 class="section-title" style="color:#fff;">全8冊 ラインナップ一覧</h2>
+    <p class="section-sub">人間関係・自己成長・東洋哲学・西洋哲学を網羅した、実践的ライブラリ</p>
+  </div>
+  <div class="book-list">
+    <div class="book-item">
+      <div class="num">BOOK 01</div>
+      <h4>ギブで人生が変わる習慣</h4>
+      <p>賢く与えることで信頼と成果を手に入れる。テイカー対策・境界線の引き方まで。</p>
+      <a href="https://www.amazon.co.jp/dp/B0H1VTFSX2?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist01" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+    <div class="book-item">
+      <div class="num">BOOK 02</div>
+      <h4>競争しない人ほど、うまくいく<br>——人生を優雅に生きる技術</h4>
+      <p>WIN-WIN関係で競争を超えた豊かさを手に入れる哲学と実践法。</p>
+      <a href="https://www.amazon.co.jp/dp/B0H1WCT76B?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist02" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+    <div class="book-item">
+      <div class="num">BOOK 03</div>
+      <h4>薬指の長い人の人生攻略大全</h4>
+      <p>生まれ持った気質・才能を薬指から読み解き、自己理解と人間関係を深める。</p>
+      <a href="https://www.amazon.co.jp/dp/B0GQPH9XV3?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist03" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+    <div class="book-item">
+      <div class="num">BOOK 04</div>
+      <h4>努力のはかり</h4>
+      <p>量より質の努力論。成果につながる正しい努力の測り方と動き方。</p>
+      <a href="https://www.amazon.co.jp/dp/B0H23QRHVD?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist04" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+    <div class="book-item">
+      <div class="num">BOOK 05</div>
+      <h4>人生が停滞している人の9割が知らない考え方 徹底ガイド</h4>
+      <p>思考の盲点を発見し、停滞を突破する考え方のアップデート法。</p>
+      <a href="https://www.amazon.co.jp/dp/B0GNK1TV8X?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist05" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+    <div class="book-item">
+      <div class="num">BOOK 06</div>
+      <h4>歎異抄で読み解く成功論</h4>
+      <p>800年の名著を現代の成功論として解釈。心の軸となる日本人の哲学。</p>
+      <a href="https://www.amazon.co.jp/dp/B0GPN3KKRT?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist06" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+    <div class="book-item">
+      <div class="num">BOOK 07</div>
+      <h4>般若心経——心を整える智慧</h4>
+      <p>執着・不安・怒りを手放す。2600年の智慧を日常に活かす実践書。</p>
+      <a href="https://www.amazon.co.jp/dp/B0GQ6MKGNV?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist07" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+    <div class="book-item">
+      <div class="num">BOOK 08</div>
+      <h4>小学生でも解るカントの哲学で<br>人生と道徳が整う教科書</h4>
+      <p>難解なカント哲学をやさしく解説。ぶれない道徳の判断軸を論理で身につける。</p>
+      <a href="https://www.amazon.co.jp/dp/B0GRQ53P32?utm_source=persona_lp&utm_medium=lp&utm_campaign=personalp&utm_content=booklist08" class="btn-amazon" target="_blank">Amazonで見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<p class="bridge">ここまで読んで「なぜこの8冊なのか」気になった方へ。<br>このシリーズを書いているのは、こんな人間です。</p>
+
+<!-- AUTHOR PROFILE -->
+<section class="author-section">
+  <div class="avatar"><img src="author_photo.jpg" alt="塚原毅" /></div>
+  <h2>塚原毅</h2>
+  <p class="role">電子書籍出版プロデューサー／寿司職人歴40年</p>
+  <div class="author-stats">
+    <div class="stat"><span class="num">全8冊</span><span class="label">既刊シリーズ</span></div>
+    <div class="stat"><span class="num">40年</span><span class="label">寿司職人としての現場経験</span></div>
+    <div class="stat"><span class="num">一貫</span><span class="label">企画〜原稿〜表紙〜販売導線まで</span></div>
+  </div>
+  <p class="bio">寿司職人として40年、カウンター越しにお客様の表情と向き合い続けてきた。大切なのは技術以上に、人の心に届くものを作ること——その現場で培った「人を見る力」を、今はKindle電子書籍の企画・原稿・表紙・紹介文・販売導線までのプロデュースに活かしている。読者が「これは自分のことだ」と感じ、読み終えたあと少し心が軽くなり、明日から一歩動きたくなる。そんな一冊を届け続けたい。</p>
+</section>
+
+<!-- LEAD CAPTURE -->
+<section class="lead-capture">
+  <p class="step-label">STEP 2 ｜ 今回は決められなかった方へ</p>
+  <h2>今回はスルーしても大丈夫。<br>新刊が出たら、また知らせます。</h2>
+  <p>
+    新刊が出るたびに、あなたにまた「効く一冊」を届けます。<br>
+    登録者だけの先行案内つき。<br>
+    今、1分で登録しておけば十分です。
+  </p>
+  <a href="https://lin.ee/qSmZof8r" class="btn-lead" target="_blank">無料で新刊情報を受け取る →</a>
+</section>
+
+<footer>
+  <p>© 人生をよりよく生きるためのライブラリ — すべての本に、あなたの人生を変える力がある</p>
+</footer>
+
+<script>
+(function () {
+  var cardsContainer = document.querySelector('.cards');
+  var cards = document.querySelectorAll('.cards .card');
+  var chips = document.querySelectorAll('.quick-nav .chip');
+  var resetLink = document.getElementById('reset-filter');
+  var personaSection = document.querySelector('.section');
+
+  function showOnly(id) {
+    var matched = false;
+    cards.forEach(function (card) {
+      var hide = !!id && card.id !== id;
+      card.classList.toggle('is-hidden', hide);
+      if (card.id === id) matched = true;
+    });
+    cardsContainer.classList.toggle('is-filtered', !!id && matched);
+    chips.forEach(function (chip) {
+      chip.classList.toggle('active', chip.getAttribute('href') === '#' + id);
+    });
+    resetLink.style.display = matched ? 'inline-block' : 'none';
+    document.querySelectorAll('.related-suggestion').forEach(function (rs) {
+      rs.style.display = (id && rs.id === 'related-' + id) ? 'block' : 'none';
+    });
+    return matched;
+  }
+
+  function track(eventName, params) {
+    if (typeof gtag === 'function') gtag('event', eventName, params || {});
+  }
+  function utmContentOf(url) {
+    try { return new URL(url, location.href).searchParams.get('utm_content') || ''; } catch (e) { return ''; }
+  }
+  cards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      track('persona_card_click', { persona: utmContentOf(card.href) });
+    });
+  });
+  document.querySelectorAll('.book-list .btn-amazon').forEach(function (a) {
+    a.addEventListener('click', function () {
+      track('booklist_click', { persona: utmContentOf(a.href) });
+    });
+  });
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      track('quiznav_click', { persona: chip.getAttribute('href').replace('#', '') });
+    });
+  });
+  document.querySelectorAll('.related-link').forEach(function (a) {
+    a.addEventListener('click', function () {
+      track('related_click', { persona: utmContentOf(a.href) });
+    });
+  });
+  var leadBtn = document.querySelector('.btn-lead');
+  if (leadBtn) {
+    leadBtn.addEventListener('click', function () { track('line_signup_click', {}); });
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function (e) {
+      var id = chip.getAttribute('href').slice(1);
+      if (!document.getElementById(id)) return;
+      e.preventDefault();
+      history.pushState(null, '', '#' + id);
+      showOnly(id);
+      personaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  resetLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    history.pushState(null, '', location.pathname + location.search);
+    showOnly(null);
+    personaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  window.addEventListener('hashchange', function () {
+    var id = location.hash.slice(1);
+    showOnly(id && document.getElementById(id) ? id : null);
+  });
+
+  var initialId = location.hash.slice(1);
+  if (initialId) showOnly(initialId);
+})();
+</script>
+
+</body>
+</html>
